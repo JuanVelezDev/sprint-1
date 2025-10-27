@@ -175,7 +175,3 @@ Ninguno / [Describir problemas si los hay]
 **Total:** X horas
 
 ---
-
-## Notas Adicionales
-
-<!-- Cualquier información adicional relevante para los revisores -->
