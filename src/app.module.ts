@@ -1,10 +1,10 @@
-// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { getTypeOrmConfig } from './config/database.config';
 import { UsersModule } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,13 +13,13 @@ import { TasksModule } from './tasks/tasks.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: getTypeOrmConfig, // usamos la función helper
+      useFactory: getTypeOrmConfig,
     }),
 
     UsersModule,
-    // TasksModule, // descomenta cuando lo necesites
+    TasksModule,
+    AuthModule,
+    // TasksModule, // la dejamos lista para más adelante
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

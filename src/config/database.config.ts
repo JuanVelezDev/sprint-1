@@ -13,7 +13,7 @@ export const getTypeOrmConfig = (configService: ConfigService): TypeOrmModuleOpt
     type: 'postgres',
     url,
     autoLoadEntities: true,
-    synchronize: false, 
+    synchronize: true, 
     logging: configService.get('NODE_ENV') !== 'production',
     ssl: {
       rejectUnauthorized: false, // necesario para Supabase
