@@ -1,21 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Task } from '../../tasks/entities/task.entity';
 
-@Entity('users') 
+@Entity('users')
 export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column({ type: 'varchar', length: 100 })
-  name: string; 
+  @Column()
+  name: string;
 
-  @Column({ type: 'varchar', unique: true, length: 150 })
-  email: string; 
+  @Column({ unique: true })
+  email: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  password: string; 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  @Column()
+  password: string;
 
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  @OneToMany(() => Task, (task) => task.user, { cascade: true })
+  tasks: Task[];
 }
