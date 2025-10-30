@@ -1,35 +1,39 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { User } from "src/users/entities/user.entity";
 
-enum TaskStatus{
+export enum TaskStatus{
     PENDING = "PENDING",
     IN_PROGRESS = "IN_PROGRESS",
     DONE = "DONE",
 }
 
-@Entity()
+@Entity('tasks')
 export class Task {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
-    @Column()
+    @Column({ length: 100 })
     title: string;
 
-    @Column({ nullable: true })
+    @Column({type: 'text', nullable: true })
     description: string;
 
-    @Column()
+    @Column({
+        type: 'enum',
+        enum: TaskStatus,
+        default: TaskStatus.PENDING
+    })
     status: TaskStatus;
 
-    @ManyToOne(() => User, (user) => user.tasks)
+    @ManyToOne(() => User, (user) => user.tasks, {onDelete: 'CASCADE'})
     user: User;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }
 
 
-/*export class Task{
-    id: string;
-    title: string;
-    description: string;
-    status: TaskStatus;
-    user: string;
-}*/
+

@@ -19,7 +19,6 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     TasksModule,
     AuthModule,
-    // TasksModule, // la dejamos lista para más adelante
-  ],
+    ],
 })
 export class AppModule {}
